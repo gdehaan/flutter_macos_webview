@@ -51,6 +51,8 @@ class FlutterMacOSWebView {
   /// [javascriptEnabled] - enables or disables Javascript execution until next `open` call.
   /// Must not be null
   ///
+  /// [clearCookies] - clear cookies.
+  ///
   /// [presentationStyle] - WebView window presentation style. Available styles
   /// are `modal` and `sheet` depending on which plugin calls respectively
   /// `presentAsModalWindow` or `presentAsSheet` from `NSViewController`.
@@ -66,6 +68,7 @@ class FlutterMacOSWebView {
   Future<void> open({
     required String url,
     bool javascriptEnabled = true,
+    bool clearCookies = false,
     PresentationStyle presentationStyle = PresentationStyle.sheet,
     Size? size,
     // Offset origin,
@@ -78,6 +81,7 @@ class FlutterMacOSWebView {
     await _channel.invokeMethod('open', {
       'url': url,
       'javascriptEnabled': javascriptEnabled,
+      'clearCookies': clearCookies,
       'presentationStyle': presentationStyle.index,
       'customSize': size != null,
       'width': size?.width,

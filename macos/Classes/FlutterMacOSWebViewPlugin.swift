@@ -111,6 +111,10 @@ public class FlutterMacOSWebViewPlugin: NSObject, FlutterPlugin {
         
         webViewCtrl.javascriptEnabled = args["javascriptEnabled"] as! Bool
         webViewCtrl.userAgent = args["userAgent"] as? String
+
+        if (args["clearCookies"] as! Bool) {
+            webViewCtrl.clearCookies();
+        }
         
         webViewCtrl.loadUrl(url: url)
                 

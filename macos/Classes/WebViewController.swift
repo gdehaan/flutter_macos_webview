@@ -65,6 +65,18 @@ class WebViewController: NSViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func clearCookies() {
+        let cookieStore = webview.configuration.websiteDataStore.httpCookieStore
+        
+        cookieStore.getAllCookies {
+            cookies in
+        
+            for cookie in cookies {
+                cookieStore.delete(cookie)
+            }
+        }
+    }
     
     func loadUrl(url: URL) {
         let req = URLRequest(url: url)
